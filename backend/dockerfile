@@ -1,5 +1,5 @@
 # Build 
-FROM node:12-alpine AS build
+FROM node:18-alpine AS build
 
 #setting up working directory 
 WORKDIR /usr/src/app
