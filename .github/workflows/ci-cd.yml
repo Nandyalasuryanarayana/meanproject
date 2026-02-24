@@ -89,13 +89,7 @@ jobs:
        host: ${{ secrets.VM_IP }}
        username: ${{ secrets.VM_USER }}
        key: ${{ secrets.VM_SSH_KEY }}
-       port: 22
-       script: | 
-          cd /meanproject && \
-          git pull origin main && \
-          docker compose pull && \
-          docker compose down && \
-          docker compose up -d && \
+       script: cd /meanproject && git pull origin main && docker compose pull && docker compose up -d \
           docker image prune -f
 
 
