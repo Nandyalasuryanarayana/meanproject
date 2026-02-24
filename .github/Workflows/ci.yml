@@ -17,7 +17,7 @@ jobs:
         node-version: '18'
         cache: 'npm'
     
-    # Frontend: Install, Test, build
+    # Frontend: Install, Test, Build
     - name: Frontend - Install
       working-directory: ./frontend
       run: npm ci
