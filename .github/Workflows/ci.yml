@@ -30,7 +30,7 @@ jobs:
       working-directory: ./frontend
       run: npm run build
       
-    # Backend: Install, Test, Build , test
+    # Backend: Install, Test, Build 
     - name: Backend - Install
       working-directory: ./backend
       run: npm ci
