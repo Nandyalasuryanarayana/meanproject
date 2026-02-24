@@ -1,0 +1,24 @@
+services:
+  frontend:
+    image: yourusername/mean-frontend:latest
+    ports: ["80:80"]
+    depends_on: [backend]
+    networks: [- mean-network]
+    
+  backend:
+    image: yourusername/mean-backend:latest
+    ports: ["3000:3000"]
+    environment:
+      MONGO_URI: mongodb://mongo:27017/meandb
+    depends_on: [mongo]
+    networks: [- mean-network]
+    
+  mongo:
+    image: mongo:6
+    volumes: [mongo-data:/data/db]
+    networks: [- mean-network]
+    
+volumes:
+  mongo-data:
+networks:
+  mean-network:

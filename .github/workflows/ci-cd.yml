@@ -22,11 +22,6 @@ jobs:
     - name: Frontend - Install
       working-directory: ./frontend
       run: npm ci
-      
-    # - name: Frontend - Test (skip)
-    #   working-directory: ./frontend
-    #   run: echo "Tests skipped - fix pending"
-    #   continue-on-error: true
 
     - name: Frontend - Test
       working-directory: ./frontend
@@ -73,6 +68,22 @@ jobs:
         docker tag mean-backend:latest ${{ secrets.DOCKERHUB_USERNAME }}/mean-backend:latest
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/mean-frontend:latest
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/mean-backend:latest
+
+  deploy-vm:
+    #needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy to VM
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.VM_IP }}
+        username: ${{ secrets.VM_USER }}
+        key: ${{ secrets.VM_SSH_KEY }}
+        script: |
+          cd /meanproject
+          git pull origin main
+          docker compose pull
+          docker compose up -d
 
 
        
