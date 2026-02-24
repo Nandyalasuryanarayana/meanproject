@@ -54,7 +54,14 @@ jobs:
       
     # Build Docker Images (always on push)
     - name: Build Frontend Image
-      run: docker build -t mean-frontend:latest -f frontend/dockerfile .
+      run: |
+          docker builder prune -f
+          docker build \
+              --no-cache \
+              -t mean-frontend:latest \
+              -f frontend/Dockerfile \
+                frontend/
+
     
     - name: Build Backend Image
       run: docker build -t mean-backend:latest -f backend/dockerfile .
