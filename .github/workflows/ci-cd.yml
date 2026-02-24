@@ -89,9 +89,12 @@ jobs:
        host: ${{ secrets.VM_IP }}
        username: ${{ secrets.VM_USER }}
        key: ${{ secrets.VM_SSH_KEY }}
-       script: cd /meanproject/your-repo || exit 1
-        git pull origin main && docker compose pull && docker compose up -d \
-          docker image prune -f
+       script: |
+            cd /home/ubuntu/meanproject && \
+            git pull origin main && \
+            docker compose pull && \
+            docker compose up -d && \
+            docker system prune -f
 
 
        

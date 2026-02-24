@@ -25,7 +25,7 @@ yarn-error.log*
 
 # Ignore Docker files not needed inside image
 Dockerfile*
-docker-compose.yml
+
 
 # Ignore OS/editor files
 .DS_Store
