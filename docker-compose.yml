@@ -1,24 +1,39 @@
+version: '3.8'
+
 services:
   frontend:
-    image: yourusername/mean-frontend:latest
-    ports: ["80:80"]
-    depends_on: [backend]
-    networks: [- mean-network]
-    
+    image: ${DOCKERHUB_USERNAME}/mean-frontend:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - mean-network
+
   backend:
-    image: yourusername/mean-backend:latest
-    ports: ["3000:3000"]
+    image: ${DOCKERHUB_USERNAME}/mean-backend:latest
+    ports:
+      - "3000:3000"
     environment:
-      MONGO_URI: mongodb://mongo:27017/meandb
-    depends_on: [mongo]
-    networks: [- mean-network]
-    
+      - MONGO_URI=mongodb://mongo:27017/meandb
+    depends_on:
+      - mongo
+    networks:
+      - mean-network
+
   mongo:
     image: mongo:6
-    volumes: [mongo-data:/data/db]
-    networks: [- mean-network]
-    
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - mean-network
+
 volumes:
-  mongo-data:
+  mongodb_data:
+
 networks:
   mean-network:
+    driver: bridge
+
