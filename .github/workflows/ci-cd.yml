@@ -70,6 +70,18 @@ jobs:
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/mean-backend:latest
 
     # setting up vm to deploy
+    - name: Debug VM Connection
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+       host: ${{ secrets.VM_IP }}
+       username: ${{ secrets.VM_USER }}
+       key: ${{ secrets.VM_SSH_KEY }}
+       script: |
+         whoami
+         pwd
+         ls -la
+         docker --version
+         docker compose version
 
     - name: Deploy to VM
       uses: appleboy/ssh-action@v1.0.3
