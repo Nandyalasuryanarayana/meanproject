@@ -5,7 +5,7 @@ FROM node:18-alpine AS build
 WORKDIR /usr/src/app
 
 #copying dependencies 
-COPY package*.json ./
+COPY package*.json .
 
 #install and update dependencies
 RUN npm install
