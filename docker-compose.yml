@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   frontend:
-    image: ${DOCKERHUB_USERNAME}/mean-frontend:latest
+    image: sridavid/mean-frontend:latest
     ports:
       - "80:80"
     depends_on:
@@ -11,7 +11,7 @@ services:
       - mean-network
 
   backend:
-    image: ${DOCKERHUB_USERNAME}/mean-backend:latest
+    image: sridavid/mean-backend:latest
     ports:
       - "3000:3000"
     environment:
