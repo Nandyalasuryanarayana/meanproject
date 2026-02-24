@@ -58,7 +58,13 @@ jobs:
                 frontend/
 
     - name: Build Backend Image
-      run: docker build -t mean-backend:latest -f backend/dockerfile .
+      run: |
+          docker builder prune -f
+          docker build \
+             --no-cache \
+             -t mean-backend:latest \
+             -f backend/Dockerfile \
+               backend/
     
     # Push to Docker Hub (always on main push)
     - name: Login & Push Images
