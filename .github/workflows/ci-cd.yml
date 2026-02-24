@@ -54,10 +54,10 @@ jobs:
       
     # Build Docker Images (always on push)
     - name: Build Frontend Image
-      run: docker build -t mean-frontend:latest -f frontend/Dockerfile .
+      run: docker build -t mean-frontend:latest -f frontend/dockerfile .
     
     - name: Build Backend Image
-      run: docker build -t mean-backend:latest -f backend/Dockerfile .
+      run: docker build -t mean-backend:latest -f backend/dockerfile .
     
     # Push to Docker Hub (always on main push)
     - name: Login & Push Images
