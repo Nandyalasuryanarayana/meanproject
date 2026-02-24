@@ -62,7 +62,6 @@ jobs:
               -f frontend/Dockerfile \
                 frontend/
 
-    
     - name: Build Backend Image
       run: docker build -t mean-backend:latest -f backend/dockerfile .
     
@@ -70,7 +69,9 @@ jobs:
     - name: Login & Push Images
       run: |
         echo '${{ secrets.DOCKERHUB_TOKEN }}' | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-        docker tag mean-frontend:latest ${{ secrets.DOCKERHUB_USERNAME }}/mean-frontend:latest
-        docker tag mean-backend:latest ${{ secrets.DOCKERHUB_USERNAME }}/mean-backend:latest
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/mean-frontend:latest
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/mean-backend:latest
+
+
+       # docker tag mean-frontend:latest ${{ secrets.DOCKERHUB_USERNAME }}/mean-frontend:latest
+      # docker tag mean-backend:latest ${{ secrets.DOCKERHUB_USERNAME }}/mean-backend:latest
