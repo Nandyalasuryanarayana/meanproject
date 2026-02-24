@@ -69,21 +69,22 @@ jobs:
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/mean-frontend:latest
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/mean-backend:latest
 
-  deploy-vm:
-    #needs: build
-    runs-on: ubuntu-latest
-    steps:
+    # setting up vm to deploy
+
     - name: Deploy to VM
       uses: appleboy/ssh-action@v1.0.3
       with:
-        host: ${{ secrets.VM_IP }}
-        username: ${{ secrets.VM_USER }}
-        key: ${{ secrets.VM_SSH_KEY }}
-        script: |
-          cd /meanproject
-          git pull origin main
-          docker compose pull
-          docker compose up -d
+       host: ${{ secrets.VM_IP }}
+       username: ${{ secrets.VM_USER }}
+       key: ${{ secrets.VM_SSH_KEY }}
+       port: 22
+       script: | 
+          cd /meanproject && \
+          git pull origin main && \
+          docker compose pull && \
+          docker compose down && \
+          docker compose up -d && \
+          docker image prune -f
 
 
        
