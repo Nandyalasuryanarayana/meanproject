@@ -25,7 +25,7 @@ FROM nginx:alpine
 COPY --from=builder /app/dist/angular-15-crud /usr/share/nginx/html
 
 #nginx set up to connect backend
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
 #app listens on this port
 EXPOSE 80
